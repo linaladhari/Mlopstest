@@ -1,0 +1,24 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/raw/iris.csv data/processed/processed.csv
+    deps:
+    - data/raw/iris.csv
+    - src/preprocess.py
+    outs:
+    - data/processed/processed.csv
+  evaluate:
+    cmd: python src/evaluate.py data/processed/processed.csv models/model.pkl metrics/metrics.json
+    deps:
+    - data/processed/processed.csv
+    - models/model.pkl
+    - src/evaluate.py
+    metrics:
+    - metrics/metrics.json:
+        cache: false
+  train:
+    cmd: python src/train.py data/processed/processed.csv models/model.pkl
+    deps:
+    - data/processed/processed.csv
+    - src/train.py
+    outs:
+    - models/model.pkl
