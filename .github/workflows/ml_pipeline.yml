@@ -27,11 +27,11 @@ jobs:
 
       # --- RUN PREPROCESSING ---
       - name: Run preprocessing
-        run: python scripts/preprocess.py
+        run: python src/preprocess.py
 
       # --- RUN TRAINING ---
       - name: Run training
-        run: python scripts/train.py
+        run: python src/train.py
 
       # --- SAVE METRICS AS ARTIFACT ---
       - name: Upload metrics
