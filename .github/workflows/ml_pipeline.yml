@@ -22,39 +22,39 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requiremments.txt
 
-    - name: Create folders if missing
+    - name: Create missing folders
       run: |
         mkdir -p data/raw
         mkdir -p data/processed
-        mkdir -p models
         mkdir -p metrics
+        mkdir -p models
 
     - name: Run preprocessing
       run: |
-        python preprocess.py \
+        python src/preprocess.py \
           --input_path data/raw/iris.csv \
           --output_path data/processed/iris.csv
 
     - name: Train model
       run: |
-        python train.py \
+        python src/train.py \
           --data_path data/processed/iris.csv \
           --model_path models/model.pkl \
           --model_type knn \
           --k 5
 
-    - name: Upload metrics as artifacts
+    - name: Upload metrics artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: mlops-metrics
+        name: metrics
         path: |
           metrics/metrics.json
           metrics/metrics.txt
 
-    - name: Upload trained model
+    - name: Upload model artifact
       uses: actions/upload-artifact@v4
       with:
-        name: trained-model
+        name: model
         path: models/model.pkl

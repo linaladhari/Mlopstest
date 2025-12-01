@@ -5,7 +5,7 @@ import json
 # sys.argv[1] -> input data
 # sys.argv[2] -> model path
 # sys.argv[3] -> output metrics path
-metrics_output_path = sys.argv[3]
+metrics_output_path = "src/metrics.txt"
 
 # Normally evaluation happens here
 metrics = {"val_accuracy": 0.85}  # dummy metric
